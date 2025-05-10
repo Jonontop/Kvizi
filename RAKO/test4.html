@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT FAQ - Virtualizacija in Omrežja</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .category {
+            margin-bottom: 30px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .category-header {
+            background-color: #3498db;
+            color: white;
+            padding: 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+        }
+        
+        .category-content {
+            display: none;
+            padding: 0;
+        }
+        
+        .question {
+            background-color: #ecf0f1;
+            padding: 15px;
+            cursor: pointer;
+            border-bottom: 1px solid #ddd;
+            transition: background-color 0.3s;
+            font-weight: 500;
+        }
+        
+        .question:hover {
+            background-color: #d6eaf8;
+        }
+        
+        .question:last-child {
+            border-bottom: none;
+        }
+        
+        .answer {
+            display: none;
+            padding: 15px;
+            background-color: white;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .active {
+            background-color: #d6eaf8;
+        }
+        
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        ul, ol {
+            padding-left: 20px;
+        }
+        
+        .arrow {
+            transition: transform 0.3s;
+        }
+        
+        .rotate {
+            transform: rotate(180deg);
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .visible {
+            display: block;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        .searchbox {
+            padding: 10px;
+            width: 100%;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>IT FAQ - Virtualizacija in Omrežja</h1>
+        <input type="text" id="searchInput" class="searchbox" placeholder="Išči vprašanja...">
+    </header>
+
+    <div class="container">
+        <!-- VIRTUALIZACIJA -->
+        <div class="category">
+            <div class="category-header">
+                VIRTUALIZACIJA
+                <span class="arrow">▼</span>
+            </div>
+            <div class="category-content">
+                <div class="question">Kaj je virtualizacija?</div>
+                <div class="answer">
+                    <p>Virtualizacija je izvajanje večih navideznih strojev na eni strojni opremi. Omogoča boljšo izrabo strojnih virov, saj strežniki tipično uporabljajo le 10-15% razpoložljivih virov.</p>
+                    <p>Virtualizator je programska oprema, ki omogoča delovanje več navideznih računalnikov (virtualnih strojev) na enem fizičnem računalniku. Vsak virtualni stroj deluje kot ločen sistem z lastnim operacijskim sistemom.</p>
+                </div>
+                
+                <div class="question">Kakšne vrste virtualizatorjev poznamo?</div>
+                <div class="answer">
+                    <p>Virtualizatorje lahko razdelimo na dve vrsti:</p>
+                    <ul>
+                        <li><strong>Kot operacijski sistem (Tip 1)</strong> – delujejo neposredno na strojni opremi in sami upravljajo virtualne stroje (npr. VMware ESXi, Hyper-V Server).</li>
+                        <li><strong>Kot programska oprema (Tip 2)</strong> – namestijo se znotraj obstoječega operacijskega sistema kot običajen program (npr. VirtualBox, VMware Workstation).</li>
+                    </ul>
+                </div>
+                
+                <div class="question">Kakšne vrste omrežnih vmesnikov poznamo pri virtualizaciji?</div>
+                <div class="answer">
+                    <p>Pri virtualizaciji poznamo več vrst omrežnih vmesnikov:</p>
+                    <ul>
+                        <li><strong>NAT vmesnik:</strong> omogoča navideznemu stroju dostop do zunanjega omrežja, ne omogoča pa drugim napravam dostopa do navideznega stroja.</li>
+                        <li><strong>Gostiteljski vmesnik:</strong> Omogoča povezavo med gostiteljem in navideznim strojem, ne omogoča pa povezave z zunanjim omrežjem.</li>
+                        <li><strong>Povezan vmesnik:</strong> Omogoča vse povezave - med gostiteljem, navideznim strojem in zunanjim omrežjem.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- APLIKACIJSKA PLAST -->
+        <div class="category">
+            <div class="category-header">
+                APLIKACIJSKA PLAST
+                <span class="arrow">▼</span>
+            </div>
+            <div class="category-content">
+                <div class="question">Kaj je aplikacijska plast?</div>
+                <div class="answer">
+                    <p>Aplikacijska plast je:</p>
+                    <ul>
+                        <li>7. plast ISO/OSI modela</li>
+                        <li>5. plast TCP/IP modela (sejna + predstavitvena + aplikacijska)</li>
+                        <li>Vmesnik med uporabniškim programom in omrežjem</li>
+                    </ul>
+                </div>
+                
+                <div class="question">Katere kategorije aplikacijskih protokolov poznamo?</div>
+                <div class="answer">
+                    <p>Aplikacijske protokole lahko razdelimo na:</p>
+                    <ul>
+                        <li><strong>Podpora omrežju:</strong> DHCP, DNS</li>
+                        <li><strong>Oddaljen dostop:</strong> Telnet, SSH, RDP/UNC</li>
+                        <li><strong>Prenos datotek:</strong> FTP, TFTP</li>
+                        <li><strong>Hiperbesedila:</strong> HTTP, HTTPS</li>
+                        <li><strong>E-pošta:</strong> SMTP, IMAP, POP3</li>
+                        <li><strong>Avtentikacija:</strong> RADIUS, LDAP</li>
+                        <li><strong>Omrežna shramba:</strong> SMB, NFS</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- DNS -->
+        <div class="category">
+            <div class="category-header">
+                DNS
+                <span class="arrow">▼</span>
+            </div>
+            <div class="category-content">
+                <div class="question">Kaj je DNS in čemu služi?</div>
+                <div class="answer">
+                    <p>DNS (Domain Name System) je sistem, ki prevaja domenske naslove v IP naslove.</p>
+                    <p>Domene si lažje zapomnimo kot IP naslove, zato DNS omogoča uporabniku prijaznejše naslavljanje v omrežju.</p>
+                    <p>Na svetu imamo 13 korenskih DNS strežnikov, ki poznajo naslove TLD strežnikov (top level domain).</p>
+                    <p>DNS deluje na 53 vratih transportne plasti z UDP protokolom.</p>
+                </div>
+                
+                <div class="question">Kakšne tipe DNS vnosov poznamo?</div>
+                <div class="answer">
+                    <ul>
+                        <li><strong>A</strong> → IPv4 naslov</li>
+                        <li><strong>AAAA</strong> → IPv6 naslov</li>
+                        <li><strong>CNAME</strong> → Canonical name (drugo ime) - vnos ima IP naslov druge domene</li>
+                        <li><strong>MX</strong> → Mail exchange - vnos za e-poštni strežnik</li>
+                        <li><strong>PTR</strong> → Pointer - prevajanje IP naslova v domeno</li>
+                        <li><strong>NS</strong> → Name server - podrejeni DNS strežnik</li>
+                    </ul>
+                </div>
+                
+                <div class="question">Kakšne vrste DNS strežnikov poznamo?</div>
+                <div class="answer">
+                    <p>Poznamo dve glavni vrsti DNS strežnikov:</p>
+                    <ul>
+                        <li><strong>Avtoritativni DNS strežniki</strong> - skrbijo za 1 domeno</li>
+                        <li><strong>Dostopni DNS strežniki</strong> - njih uporabljajo uporabniki za hitrejši prevod domene</li>
+                    </ul>
+                    <p>Dobro znani dostopni DNS strežniki:</p>
+                    <ul>
+                        <li>ARNES: 193.2.1.66, 193.2.1.72</li>
+                        <li>GOOGLE: 8.8.8.8</li>
+                        <li>CLOUDFLARE: 1.1.1.1</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- DHCP -->
+        <div class="category">
+            <div class="category-header">
+                DHCP
+                <span class="arrow">▼</span>
+            </div>
+            <div class="category-content">
+                <div class="question">Kaj je DHCP?</div>
+                <div class="answer">
+                    <p>DHCP (Dynamic Host Configuration Protocol) je protokol za avtomatsko dodeljevanje IP naslovov napravam v omrežju.</p>
+                    <p>Deluje na UDP vratih 67.</p>
+                </div>
+                
+                <div class="question">Kako poteka pridobitev IP naslova preko DHCP?</div>
+                <div class="answer">
+                    <ol>
+                        <li><strong>DHCP discover</strong> - odjemalec pošlje paket vsem napravam v omrežju (broadcast: FF:FF:FF:FF:FF:FF), kjer sprašuje, če obstaja DHCP strežnik</li>
+                        <li><strong>DHCP offer</strong> - DHCP strežnik "iskanju" odgovori s ponudbo, ki vsebuje informacije o omrežju (IP naslov, maska, prehod...)</li>
+                        <li><strong>DHCP request</strong> - odjemalec strežnik prosi za dodelitev IP naslova</li>
+                        <li><strong>DHCP acknowledge</strong> - DHCP strežnik potrdi izdajo naslova in nastavi čas veljavnosti</li>
+                    </ol>
+                </div>
+                
+                <div class="question">Kako nastavljamo DHCP strežnik?</div>
+                <div class="answer">
+                    <p>DHCP strežnik ima nastavljene bazene (pool) za posamezno omrežje.</p>
+                    <p><strong>Obvezne lastnosti:</strong></p>
+                    <ul>
+                        <li>Omrežni naslov → katere IP naslove uporablja</li>
+                        <li>Maska</li>
+                    </ul>
+                    <p><strong>Neobvezne lastnosti:</strong></p>
+                    <ul>
+                        <li>Privzeti prehod</li>
+                        <li>DNS strežnik (lahko tudi več)</li>
+                        <li>Časovni pas</li>
+                        <li>Časovni strežnik NTP</li>
+                        <li>Log strežnik</li>
+                        <li>Zagonski strežnik PXE</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ODDALJEN DOSTOP -->
+        <div class="category">
+            <div class="category-header">
+                ODDALJEN DOSTOP
+                <span class="arrow">▼</span>
+            </div>
+            <div class="category-content">
+                <div class="question">Kaj je Telnet in za kaj se uporablja?</div>
+                <div class="answer">
+                    <p><strong>Telnet:</strong></p>
+                    <ul>
+                        <li>TCP protokol na vratih 23</li>
+                        <li>Protokol za prenašanje 8-bitnih znakov</li>
+                        <li>Prvotno mišljen za oddaljen dostop</li>
+                        <li>Danes se ne uporablja, ker ni šifriran</li>
+                    </ul>
+                    <p>Uporablja se za:</p>
+                    <ul>
+                        <li>Razhroščevanje - direktna tekstovna komunikacija s strežnikom</li>
+                        <li>Za radioamaterske DX strežnike</li>
+                    </ul>
+                </div>
+                
+                <div class="question">Kaj je SSH in katere prednosti ima?</div>
+                <div class="answer">
+                    <p><strong>SSH (Secure Shell):</strong></p>
+                    <ul>
+                        <li>Uporablja se za oddaljen dostop do strežnika</li>
+                        <li>TCP protokol na vratih 22</li>
+                        <li>Povezava je šifrirana → prenesene informacije so neberljive</li>
+                        <li>Šifriranje z asimetričnimi ključi, privzete dolžine 2048 bitov</li>
+                    </ul>
+                    <p>Ponuja več načinov avtentikacije:</p>
+                    <ul>
+                        <li>Z geslom</li>
+                        <li>Z uporabo javnega ključa:
+                            <ul>
+                                <li>Na računalniku ustvarite zasebni in javni ključ</li>
+                                <li>Javni ključ naložite na strežnik</li>
+                                <li>Ob prijavi strežnik preveri vašo verodostojnost z uporabo ključa</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <p>Uporaba:</p>
+                    <ul>
+                        <li>Oddaljen dostop do strežnika</li>
+                        <li>GIT</li>
+                        <li>Prenos datotek (SCP - Secure Copy)</li>
+                    </ul>
+                </div>
+                
+                <div class="question">Kaj sta RDP in VNC?</div>
+                <div class="answer">
+                    <p><strong>RDP (Remote Desktop Protocol):</strong></p>
+                    <ul>
+                        <li>Za oddaljen dostop do namizja</li>
+                        <li>TCP protokol na vratih 3389</li>
+                        <li>Microsoftov lastniški protokol</li>
+                        <li>Odjemalec: povezava z oddaljenim namizjem</li>
+                    </ul>
+                    
+                    <p><strong>VNC (Virtual Network Client):</strong></p>
+                    <ul>
+                        <li>Za oddaljen dostop do namizja</li>
+                        <li>TCP protokol na vratih 5900+</li>
+                        <li>Odprtokoden</li>
+                        <li>Več različic: RealVNC, TigerVNC, TightVNC</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- FTP -->
+        <div class="category">
+            <div class="category-header">
+                FTP IN PRENOS DATOTEK
+                <span class="arrow">▼</span>
+            </div>
+            <div class="category-content">
+                <div class="question">Kaj je FTP in kako deluje?</div>
+                <div class="answer">
+                    <p><strong>FTP (File Transport Protocol):</strong></p>
+                    <ul>
+                        <li>TCP protokol na vratih 21 (za pošiljanje ukazov) in 20 (za podatke)</li>
+                        <li>2 načina delovanja: Active in Passive</li>
+                    </ul>
+                    <p>Uporaba:</p>
+                    <p><strong>Grafični vmesnik:</strong></p>
+                    <ul>
+                        <li>FileZilla</li>
+                        <li>WinSCP</li>
+                    </ul>
+                    <p><strong>Konzolni vmesnik - ukazi:</strong></p>
+                    <ul>
+                        <li><code>DIR</code> - izpiše datoteke</li>
+                        <li><code>CD</code> - change directory</li>
+                        <li><code>PWD</code> - izpiše kje se nahajamo</li>
+                        <li><code>GET</code> - prenos datoteke na računalnik</li>
+                        <li><code>PUT</code> - naloži datoteko</li>
+                        <li><code>DELETE</code> - izbriše datoteko</li>
+                        <li><code>BYE</code> - prekinitev povezave</li>
+                    </ul>
+                    <p>Danes se za prenos datotek namesto FTP pogosteje uporabljajo:</p>
+                    <ul>
+                        <li>SFTP</li>
+                        <li>FTPS</li>
+                        <li>SSH (SCP)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- HTTP -->
+        <div class="category">
+            <div class="category-header">
+                HTTP IN HTTPS
+                <span class="arrow">▼</span>
+            </div>
+            <div class="category-content">
+                <div class="question">Kaj je HTTP in kako deluje?</div>
+                <div class="answer">
+                    <p><strong>HTTP (HyperText Transfer Protocol):</strong></p>
+                    <ul>
+                        <li>TCP protokol na vratih 80</li>
+                        <li>Namenjen za prikaz/dostop do spletnih strani</li>
+                        <li>Deluje po zgledu REST (Representational State Transfer)</li>
+                        <li>Za vsako zahtevo nam strežnik vrne odgovor</li>
+                        <li>Odgovor se lahko spreminja glede na stanje strežnika</li>
+                    </ul>
+                </div>
+                
+                <div class="question">Kakšna je zgradba HTTP zahtevka?</div>
+                <div class="answer">
+                    <p>Primer HTTP zahtevka:</p>
+                    <pre>
+GET /index.html HTTP/1.1
+Host: www.example.com
+...
+
+</pre>
+                    <ul>
+                        <li><code>GET</code> - HTTP glagol</li>
+                        <li><code>/index.html</code> - pot do datoteke</li>
+                        <li><code>HTTP/1.1</code> - HTTP različica</li>
+                        <li><code>Host:</code> - HTTP glava</li>
+                        <li>Konec zahteve označujeta 2 prazni vrstici</li>
+                    </ul>
+                    <p><strong>HTTP glagoli</strong> so dejanja, ki jih izvedemo nad spletnim strežnikom:</p>
+                    <ul>
+                        <li><code>GET</code> - pridobi</li>
+                        <li><code>POST</code> - spremeni</li>
+                        <li><code>PUT</code> - ustvari</li>
+                        <li><code>DELETE</code> - izbriši</li>
+                    </ul>
+                    <p><strong>HTTP glave:</strong></p>
+                    <ul>
+                        <li><code>Host</code> - domena (za izbiro prave strani)</li>
+                        <li><code>Accept-language</code> - predstavitvena plast</li>
+                        <li><code>Accept</code> - oblika zapisa</li>
+                        <li><code>Accept-Encoding</code> - stiskanje</li>
+                    </ul>
+                </div>
+                
+                <div class="question">Kakšne HTTP statusne kode poznamo?</div>
+                <div class="answer">
+                    <p>Primer HTTP odgovora:</p>
+                    <pre>HTTP/1.1 200 OK</pre>
+                    <ul>
+                        <li><code>HTTP/1.1</code> - HTTP različica</li>
+                        <li><code>200 OK</code> - statusna koda in sporočilo</li>
+                    </ul>
+                    <p>Pomembnejše HTTP statusne kode:</p>
+                    <ul>
+                        <li><code>200 OK</code> - zahteva uspešna</li>
+                        <li><code>403 Forbidden</code> - dostop zavrnjen</li>
+                        <li><code>404 Not Found</code> - vsebina ne obstaja</li>
+                        <li>Kode <code>5xx</code> - napake strežnikov</li>
+                    </ul>
+                </div>
+                
+                <div class="question">Kaj je HTTPS?</div>
+                <div class="answer">
+                    <p><strong>HTTPS (HTTP Secure):</strong></p>
+                    <ul>
+                        <li>TCP protokol na vratih 443</li>
+                        <li>Prenos je šifriran</li>
+                        <li>Varen prenos občutljivih podatkov</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- E-POŠTA -->
+        <div class="category">
+            <div class="category-header">
+                E-POŠTA
+                <span class="arrow">▼</span>
+            </div>
+            <div class="category-content">
+                <div class="question">Kateri protokoli se uporabljajo za pošiljanje e-pošte?</div>
+                <div class="answer">
+                    <p><strong>SMTP (Simple Mail Transfer Protocol):</strong></p>
+                    <ul>
+                        <li>Namenjen pošiljanju e-pošte</li>
+                        <li>Nešifrirano: vrata 25, TCP</li>
+                        <li>Šifrirano s TLS: vrata 587</li>
+                        <li>Šifrirano s SSL: vrata 465</li>
+                    </ul>
+                </div>
+                
+                <div class="question">Kateri protokoli se uporabljajo za prejemanje e-pošte?</div>
+                <div class="answer">
+                    <p><strong>POP3 (Post Office Protocol):</strong></p>
+                    <ul>
+                        <li>Nešifrirano: vrata 110, TCP</li>
+                        <li>Šifrirano SSL/TLS: vrata 995</li>
+                        <li>Prenešena sporočila izbriše s strežnika</li>
+                    </ul>
+                    
+                    <p><strong>IMAP (Internet Message Access Protocol):</strong></p>
+                    <ul>
+                        <li>Nešifrirano: vrata 143, TCP</li>
+                        <li>Šifrirano: vrata 993</li>
+                        <li>Prenešeno e-pošto pusti na strežniku</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- OMREŽNA SHRAMBA -->
+        <div class="category">
+            <div class="category-header">
+                OMREŽNA SHRAMBA
+                <span class="arrow">▼</span>
+            </div>
+            <div class="category-content">
+                <div class="question">Kaj je omrežna shramba in katere naprave poznamo?</div>
+                <div class="answer">
+                    <p><strong>Omrežna shramba</strong> je imenik, ki je preko omrežja dostopen uporabniku. Uporabniku lahko omejimo pravice nad posameznim deljenim imenikom.</p>
+                    
+                    <p><strong>NAS (Network-Attached Storage)</strong> je računalnik, ki omogoča deljenje imenika preko protokolov za omrežno shrambo.</p>
+                    
+                    <p><strong>Vrste naprav:</strong></p>
+                    <ol>
+                        <li><strong>Namenske NAS naprave:</strong>
+                            <ul>
+                                <li>Vgrajen OS, ki omogoča deljenje datotek</li>
+                                <li>Nizka poraba - specializirane</li>
+                                <li>Manj svobode - slab procesor, malo pomnilnika, dela samo eno stvar</li>
+                                <li>Posodobitve so omejene</li>
+                                <li>Primeri: Synology, QNAP, Ugreen</li>
+                            </ul>
+                        </li>
+                        <li><strong>Specializiran OS za omrežno shrambo:</strong>
+                            <ul>
+                                <li>OS, ki ga naložimo na računalnik</li>
+                                <li>Lahko dela več stvari - Linux</li>
+                                <li>Bolj zmogljiv</li>
+                                <li>Podpira nove datotečne sisteme - ZFS</li>
+                                <li>Višja poraba energije - sorazmerno z zmogljivostjo</li>
+                                <li>Primeri: TrueNAS, UnRAID</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+                
+                <div class="question">Kaj je RAID in kakšne vrste poznamo?</div>
+                <div class="answer">
+                    <p><strong>RAID (Redundant Array of Independent Disks)</strong> je tehnologija za povezovanje več diskov za izboljšano zanesljivost ali zmogljivost.</p>
+                    
+                    <p><strong>RAID0:</strong></p>
+                    <ul>
+                        <li>Porazdeli podatke čez vse diske</li>
+                        <li>Dobro: povečana hitrost pisanja/branja</li>
+                        <li>Slabo: če en disk odpove, izgubimo vse podatke</li>
+                    </ul>
+                    
+                    <p><strong>RAID1:</strong></p>
+                    <ul>
+                        <li>Zrcalna kopija podatkov</li>
+                        <li>Dobro: redundanca enega diska</li>
+                        <li>Slabo: ½ uporabnega prostora</li>
+                    </ul>
+                    
+                    <p><strong>RAID10:</strong></p>
+                    <ul>
+                        <li>Kombinacija RAID0 in RAID1</li>
+                        <li>Dobro: hitrost, do 2 diska redundance*</li>
+                        <li>Slabo: ½ uporabnega prostora</li>
+                    </ul>
+                    
+                    <p><strong>RAID5, RAID6:</strong></p>
+                    <ul>
+                        <li>Uporabi 1 oz. 2 diska za pariteto</li>
+                        <li>Dobro: 1/2 diska redundance</li>
+                        <li>Slabo: 2/3 uporabnega prostora</li>
+                    </ul>
+                    
+                    <p><strong>Princip 3-2-1 za varnostne kopije:</strong></p>
+                    <ul>
+                        <li>3 različne kopije (backup)</li>
+                        <li>2 na različnih medijih</li>
+                        <li>1 od tega na drugi lokaciji</li>
+                    </ul>
+                </div>
+                
+                <div class="question">Kateri protokoli se uporabljajo za omrežno shrambo?</div>
+                <div class="answer">
+                    <p><strong>SMB (Server Message Block):</strong></p>
+                    <ul>
+                        <li>Windowsov protokol za komunikacijo med napravami</li>
+                        <li>Omogoča dostop do deljenih imenikov</li>
+                        <li>Izvaja avtentikacijo in avtorizacijo uporabnikov</li>
+                    </ul>
+                    
+                    <p><strong>NFS (Network File Share):</strong></p>
+                    <ul>
+                        <li>Protokol za Linux sisteme</li>
+                        <li>Nima avtentikacije, ampak uporablja pravice v datotečnem sistemu (ACL)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- LINUX UKAZI -->
+        <div class="category">
+            <div class="category-header">
+                LINUX UKAZI
+                <span class="arrow">▼</span>
+            </div>
+            <div class="category-content">
+                <div class="question">Kako uporabljamo osnovne Linux ukaze za delo z datotekami?</div>
+                <div class="answer">
+                    <p>Najpogostejši ukazi za delo z datotekami:</p>
+                    <ul>
+                        <li><code>ls</code> - izpis vsebine direktorija</li>
+                        <li><code>ls -lat</code> - sortiranje izpisa</li>
+                        <li><code>ls -latr</code> - obrnjeno sortiranje</li>
+                        <li><code>ls -laS</code> - sortiranje po velikosti</li>
+                        <li><code>cat datoteka.txt</code> - izpiše vsebino datoteke</li>
+                        <li><code>ls ?a??.txt</code> - najde datoteke po vzorcu</li>
+                        <li><code>cat ????.txt</code> - izpiše vsebino datotek, ki ustrezajo vzorcu</li>
+                    </ul>
+                </div>
+                
+                <div class="question">Kako uporabljamo Linux ukaze za upravljanje z direktoriji?</div>
+                <div class="answer">
+                    <ul>
+                        <li><code>mkdir -p vaja/vaja9</code> - ustvari direktorij z nadrejeno mapo</li>
+                        <li><code>pwd</code> - izpiše pot do trenutne mape</li>
+                        <li><code>cd imenik</code> - premik v drug direktorij</li>
+                    </ul>
+                </div>
+                
+                <div class="question">Kako ustvariti in zagnati program v Linuxu?</div>
+                <div class="answer">
+                    <ol>
+                        <li><code>nano neki.py</code> - odpre urejevalnik besedila za ustvarjanje programa</li>
+                        <li><code>python3 neki.py</code> - zažene Python program</li>
+                        <li><code>where python3</code> - najde pot do Python interpreterja</li>
+                        <li>Za avtomatsko izvajanje dodamo v prvo vrstico datoteke <code>#! /path/to/interpreter</code></li>
+                        <li><code>chmod +x file.py</code> - nastavi dovoljenja za izvajanje</li>
+                    </ol>
+                </div>
+                
+                <div class="question">Kako uporabljamo Linux ukaze za vzdrževanje sistema?</div>
+                <div class="answer">
+                    <ul>
+                        <li><code>sudo su</code> - preklop na administratorskega uporabnika</li>
+                        <li><code>apt upgrade</code> - posodobi nameščene pakete</li>
+                        <li><code>apt install paket</code> - namesti določen paket</li>
+                        <li><code>apt search dhcp</code> - išče pakete, ki vsebujejo "dhcp"</li>
+                        <li><code>apt autoremove</code> - odstrani nepotrebne pakete</li>
+                        <li><code>systemctl restart apache2</code> - ponovno zažene storitev</li>
+                        <li><code>systemctl stop apache2</code> - ustavi storitev</li>
+                        <li><code>systemctl start apache2</code> - zažene storitev</li>
+                        <li><code>systemctl disable apache2</code> - onemogoči samodejni zagon storitve</li>
+                        <li><code>systemctl enable apache2</code> - omogoči samodejni zagon storitve</li>
+                    </ul>
+                </div>
+                
+                <div class="question">Kako preverjamo DNS in omrežne nastavitve v Linuxu?</div>
+                <div class="answer">
+                    <ul>
+                        <li><code>ping url</code> - preveri dosegljivost gostitelja</li>
+                        <li><code>nslookup url</code> - poizvedba o domeni</li>
+                        <li><code>nslookup google.com 8.8.8.8</code> - poizvedba preko določenega DNS strežnika</li>
+                        <li><code>ip a</code> - izpis omrežnih vmesnikov in IP naslovov</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle category headers
+            const categoryHeaders = document.querySelectorAll('.category-header');
+            categoryHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    const arrow = this.querySelector('.arrow');
+                    
+                    if (content.style.display === 'block') {
+                        content.style.display = 'none';
+                        arrow.classList.remove('rotate');
+                    } else {
+                        content.style.display = 'block';
+                        arrow.classList.add('rotate');
+                    }
+                });
+            });
+            
+            // Handle questions
+            const questions = document.querySelectorAll('.question');
+            questions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+                    const allAnswers = document.querySelectorAll('.answer');
+                    const allQuestions = document.querySelectorAll('.question');
+                    
+                    // Close all other answers
+                    allAnswers.forEach(a => {
+                        if (a !== answer) {
+                            a.style.display = 'none';
+                        }
+                    });
+                    
+                    // Remove active class from all questions
+                    allQuestions.forEach(q => {
+                        q.classList.remove('active');
+                    });
+                    
+                    // Toggle current answer
+                    if (answer.style.display === 'block') {
+                        answer.style.display = 'none';
+                        this.classList.remove('active');
+                    } else {
+                        answer.style.display = 'block';
+                        this.classList.add('active');
+                    }
+                });
+            });
+            
+            // Search functionality
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const questions = document.querySelectorAll('.question');
+                const categories = document.querySelectorAll('.category');
+                
+                if (searchTerm === '') {
+                    // Show all categories, hide all content and answers
+                    categories.forEach(category => {
+                        category.style.display = 'block';
+                        const content = category.querySelector('.category-content');
+                        content.style.display = 'none';
+                    });
+                    
+                    questions.forEach(question => {
+                        question.style.display = 'block';
+                        const answer = question.nextElementSibling;
+                        answer.style.display = 'none';
+                        question.classList.remove('active');
+                    });
+                    
+                    return;
+                }
+                
+                // Hide all categories first
+                categories.forEach(category => {
+                    category.style.display = 'none';
+                });
+                
+                // Check each question
+                questions.forEach(question => {
+                    const questionText = question.textContent.toLowerCase();
+                    const answer = question.nextElementSibling;
+                    const answerText = answer.textContent.toLowerCase();
+                    const category = question.closest('.category');
+                    const categoryContent = question.closest('.category-content');
+                    
+                    if (questionText.includes(searchTerm) || answerText.includes(searchTerm)) {
+                        // Show this question and its category
+                            question.style.display = 'block';
+                        category.style.display = 'block';
+                        categoryContent.style.display = 'block';
+                        
+                        // Show answer if search term is in it
+                        if (answerText.includes(searchTerm) && !questionText.includes(searchTerm)) {
+                            answer.style.display = 'block';
+                            question.classList.add('active');
+                        }
+                    } else {
+                        // Hide this question
+                        question.style.display = 'none';
+                        answer.style.display = 'none';
+                        question.classList.remove('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
