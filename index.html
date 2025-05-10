@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Šolski kvizi</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 50;
+        }
+        
+        .modal-content {
+            animation: fadeIn 0.3s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 h-screen flex flex-col items-center justify-center">
+    <h1 class="text-4xl font-bold mb-10 text-center text-blue-700">Šolski kvizi</h1>
+    
+    <div class="flex flex-col md:flex-row gap-6">
+        <button id="studentBtn" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-300 transform hover:scale-105">
+            Strokovni predmeti
+        </button>
+        <button id="teacherBtn" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-300 transform hover:scale-105">
+            Splošni predmeti
+        </button>
+    </div>
+
+    <!-- Modal for Students -->
+    <div id="studentModal" class="modal">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="modal-content bg-white rounded-lg shadow-xl p-6 w-full max-w-md">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold text-blue-700">Izberi kviz</h2>
+                    <button class="modal-close text-gray-500 hover:text-gray-800 text-2xl">&times;</button>
+                </div>
+                <div class="grid grid-cols-1 gap-3">
+                    <button class="quiz-option bg-blue-100 hover:bg-blue-200 text-blue-800 py-2 px-4 rounded-md text-left"><a href="RAKO/test3.html">RAKO 3.test</a></button>
+                    <button class="quiz-option bg-blue-100 hover:bg-blue-200 text-blue-800 py-2 px-4 rounded-md text-left"><a href="SPOP/test3-4.html">SPOP</a></button>
+                    <button class="quiz-option bg-blue-100 hover:bg-blue-200 text-blue-800 py-2 px-4 rounded-md text-left"><a href="RAKO/test4.html">RAKO 4.test</a></button>
+                    <!-- <button class="quiz-option bg-blue-100 hover:bg-blue-200 text-blue-800 py-2 px-4 rounded-md text-left"><a href="#">Fizika</a></button> -->
+                    <!-- <button class="quiz-option bg-blue-100 hover:bg-blue-200 text-blue-800 py-2 px-4 rounded-md text-left"><a href="#">Kemija</a></button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Teachers -->
+    <div id="teacherModal" class="modal">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="modal-content bg-white rounded-lg shadow-xl p-6 w-full max-w-md">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold text-green-700">Izberi kviz</h2>
+                    <button class="modal-close text-gray-500 hover:text-gray-800 text-2xl">&times;</button>
+                </div>
+                <div class="grid grid-cols-1 gap-3">
+                    <button class="quiz-option bg-green-100 hover:bg-green-200 text-green-800 py-2 px-4 rounded-md text-left"><a href="ZGO/test2.html">Zgodovina 2.test (2.letnik)</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Button elements
+        const studentBtn = document.getElementById('studentBtn');
+        const teacherBtn = document.getElementById('teacherBtn');
+        
+        // Modal elements
+        const studentModal = document.getElementById('studentModal');
+        const teacherModal = document.getElementById('teacherModal');
+        
+        // Event listeners for opening modals
+        studentBtn.addEventListener('click', () => {
+            studentModal.style.display = 'block';
+        });
+        
+        teacherBtn.addEventListener('click', () => {
+            teacherModal.style.display = 'block';
+        });
+        
+        // Event listeners for closing modals
+        const closeButtons = document.querySelectorAll('.modal-close');
+        closeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                studentModal.style.display = 'none';
+                teacherModal.style.display = 'none';
+            });
+        });
+        
+        // Close the modal when clicking outside of it
+        window.addEventListener('click', (event) => {
+            if (event.target === studentModal) {
+                studentModal.style.display = 'none';
+            }
+            if (event.target === teacherModal) {
+                teacherModal.style.display = 'none';
+            }
+        });
+        
+        // Quiz option buttons
+        const quizOptions = document.querySelectorAll('.quiz-option');
+        quizOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                alert(`Izbran kviz: ${option.textContent}`);
+                // Here you would typically navigate to the selected quiz
+                // or load quiz content dynamically
+            });
+        });
+    </script>
+</body>
+</html>
